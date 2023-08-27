@@ -2,6 +2,7 @@ const sequalize = require("../db");
 const { DataTypes } = require("sequelize");
 
 const UserSchema = sequalize.define("user", {
+  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   email: { type: DataTypes.STRING, unique: true, allowNull: false },
   password: { type: DataTypes.STRING, allowNull: false },
   isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
@@ -9,6 +10,7 @@ const UserSchema = sequalize.define("user", {
 });
 
 const TokenSchema = sequalize.define("token", {
+  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   refreshToken: { type: DataTypes.STRING, allowNull: false },
 });
 
