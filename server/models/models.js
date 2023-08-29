@@ -10,11 +10,17 @@ const UserSchema = sequalize.define("user", {
 });
 
 const TokenSchema = sequalize.define("token", {
-  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
   refreshToken: { type: DataTypes.STRING, allowNull: false },
 });
 
-UserSchema.hasOne(TokenSchema);
+UserSchema.hasOne(TokenSchema, {
+  foreignKey: "userId",
+});
 TokenSchema.belongsTo(UserSchema);
 
 module.exports = { UserSchema, TokenSchema };
