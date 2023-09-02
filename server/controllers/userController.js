@@ -1,6 +1,6 @@
 const ApiError = require("../exeptions/apiError");
 const userService = require("../service/userService");
-const tokenService = require("../service/tokenService");
+// const tokenService = require("../service/tokenService");
 const { validationResult } = require("express-validator");
 
 class UserController {
@@ -42,7 +42,8 @@ class UserController {
 
   async logout(req, res, next) {
     try {
-      const { refreshToken } = req.cookie;
+      const { refreshToken } = req.cookies;
+      console.log("TOKEN " + refreshToken);
       const token = await userService.logout(refreshToken);
       res.clearCookie("refreshToken");
       return res.json(token);
@@ -71,8 +72,8 @@ class UserController {
         httpOnly: true,
       });
       return res.json(userData);
-    } catch (err) {
-      next(err);
+    } catch (e) {
+      next(e);
     }
   }
 
