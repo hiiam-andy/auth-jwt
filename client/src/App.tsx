@@ -50,7 +50,5 @@ const App: FC = () => {
     </div>
   );
 };
-};
 
-export default observer(App);
 export default observer(App);
