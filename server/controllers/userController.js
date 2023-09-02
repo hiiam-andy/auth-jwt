@@ -1,6 +1,6 @@
 const ApiError = require("../exeptions/apiError");
 const userService = require("../service/userService");
-const tokenService = require("../service/tokenService");
+// const tokenService = require("../service/tokenService");
 const { validationResult } = require("express-validator");
 
 class UserController {
@@ -71,8 +71,8 @@ class UserController {
         httpOnly: true,
       });
       return res.json(userData);
-    } catch (err) {
-      next(err);
+    } catch (e) {
+      next(e);
     }
   }
 

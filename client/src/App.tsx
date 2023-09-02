@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC, useContext, useEffect } from "react";
+import LoginForm from "./components/LoginForm";
+import { Context } from ".";
+import { observer } from "mobx-react-lite";
 
-function App() {
+const App: FC = () => {
+  const { store } = useContext(Context);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      store.checkAuth();
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>
+        {store.isAuth ? `Авторизован ${store.user.email}` : "Неавторизован"}
+      </h1>
+      <LoginForm />
     </div>
   );
-}
+};
 
-export default App;
+export default observer(App);
