@@ -20,7 +20,11 @@ const TokenSchema = sequalize.define("token", {
 
 UserSchema.hasOne(TokenSchema, {
   foreignKey: "userId",
+  allowNull: false,
 });
-TokenSchema.belongsTo(UserSchema);
+TokenSchema.belongsTo(UserSchema, {
+  foreignKey: "userId",
+  allowNull: false,
+});
 
 module.exports = { UserSchema, TokenSchema };
